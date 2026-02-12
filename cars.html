@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contact Us</title>
+        <link rel = "stylesheet" href = "../assets/global.css">
+        <link rel = "stylesheet" href = "../assets/cars.css">
+    </head>
+    
+    <body>
+
+    <div class="name">
+            <h1>PahiramKotse</h1>
+        </div>
+
+    <div class="filter">
+    
+    <select id="vehicleBrand" onchange="filterItems()" >
+    <option value="all">Brands</option>
+    <option value="red">Toyota</option>
+    <option value="blue">Honda</option>
+    <option value="green">Mitsubishi</option>
+    <option value="yellow">Ford</option>
+    <option value="orange">Nissan</option>
+    </select>
+
+    <select id="vehicleFilter" onchange="filterItems()" >
+    <option value="all">Capacity</option>
+    <option value="red">5-seater</option>
+    <option value="blue">7-seater</option>
+    <option value="green">15-seater</option>
+    </select>
+
+    <select id="vehicleFilter" onchange="filterItems()" >
+    <option value="all">Availability</option>
+    <option value="red">Available</option>
+    <option value="blue">Not-Available</option>
+    </select>
+
+    <select id="vehicleFilter" onchange="filterItems()" >
+    <option value="all">Status</option>
+    <option value="red">Rented</option>
+    <option value="blue">Not-Rented</option>
+    </select>
+
+    <select id="vehicleFilter" onchange="filterItems()" >
+    <option value="all">See Reviews</option>
+    <option value="red">SUV</option>
+    <option value="blue">Sedan</option>
+    <option value="green">Van</option>
+    </select>
+    </div>
+
+    <div class="boxcontainer">
+        <div class="boxcars">
+            <img src="../assets/sedan.png">
+            <div class="boxcarsinfo">
+                <h2> Honda Sedan</h2>
+                <h3> 5-Seater</h3>
+                <h3> Available</h3>
+                <h3> Rentable</h3>
+                <a href="" class="disable-linkcars"> Click to see Reviews</a>
+            </div>
+        </div>
+        <hr> <br>
+        <div class="boxcars">
+            <img src="../assets/suv.png">
+            <div class="boxcarsinfo">
+                <h2> Toyota SUV</h2>
+                <h3> 5-Seater</h3>
+                <h3> Not-Available</h3>
+                <h3> Rented </h3>
+                <a href="" class="disable-linkcars"> Click to see Reviews</a>
+            </div>
+        </div>
+        <hr> <br>
+        <div class="boxcars">
+            <img src="../assets/ford.avif">
+            <div class="boxcarsinfo">
+                <h2> Ford Van</h2>
+                <h3> 15-Seater</h3>
+                <h3> Available</h3>
+                <h3> Rentable</h3>
+                <a href="" class="disable-linkcars"> Click to see Reviews</a>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <footer>
+        <div class="footerContainer">
+            <a href="homepage.html" class="disable-link"> Home</a>
+            <a href="contact-us.html" class="disable-link"> Contact Us</a>
+            <a href="reservations.html" class="disable-link"> Reservation</a>
+            <a href="friends.html" class="disable-link"> Friends</a>
+            <a href="cars.html" class="disable-link"> Our Cars</a>
+        </div>
+    </footer>
+
+    </body>
+</html>
