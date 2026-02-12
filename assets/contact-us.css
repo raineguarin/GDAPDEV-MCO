@@ -1,0 +1,21 @@
+.box {
+    text-align: center;
+    margin: 50px auto;
+    padding: 20px;
+    max-width: 600px;
+}
+
+.box h4 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 25px;
+    color: #3db7dd;
+    margin-bottom: 5px;
+}
+
+.box p {
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    color: white;
+    margin-top: 0;
+}
+
