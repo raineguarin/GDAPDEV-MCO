@@ -1,0 +1,102 @@
+.navlinks {
+    font-size: 20px;
+    list-style-type: none;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 0; 
+}
+
+.navlinks li {
+    text-align: center;
+}
+
+.navlinks a {
+    color: white;
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.navlinks a:hover {
+    color: gray;
+    transform: scale(1.05);
+}
+
+h2{
+    font-family: "Montserrat", sans-serif;
+    font-size: 37px;
+    font-style: italic;
+    color: #3db7dd;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.proceed {
+    margin: 0; 
+    display: inline-block; 
+}
+
+.regbtn {
+    font-family: "Montserrat", sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    background-color: #3db7dd;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 10px 24px;
+    min-width: 250px; 
+}
+
+.footer {
+    color: white;
+    margin-top: 20px; 
+    margin-bottom: 5px; 
+    font-family: "Montserrat", sans-serif;
+}
+
+.carsquare{
+    text-align: center;
+    margin-top: 0px;
+}
+
+.carsquare h3 {
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.carsquare p {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+h3{
+    font-family: "Montserrat", sans-serif;
+    font-size: 25px;
+    color: white;
+}
+
+p{
+    font-family: "Roboto", sans-serif;
+    font-size: 17px;
+    color: white;
+}
+
+.carbtn {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    text-align: center;
+    display: inline-block;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 5px 15px;
+    min-width: 95px; 
+}

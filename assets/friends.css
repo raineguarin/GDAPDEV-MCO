@@ -1,0 +1,29 @@
+.boxfriends {
+    margin-bottom: 20px;
+    border: 5px solid rgba(0, 0, 0, 0.03);
+    background-color: rgba(0, 0, 0, 0.03);
+    color: black;
+}
+
+.friendsheader {
+    color: #b9d9e8;
+    text-align: center;
+  }
+  
+  .friendssubheader {
+    color: #b9d9e8;
+    text-align: center;
+    font-size: smaller;
+  }
+  
+  .boxfriends h2 {
+    color: white
+  }
+  
+  .boxfriends h4 {
+    color: #3db7dd
+  }
+  
+  .boxfriends p {
+    color: black
+  }

@@ -1,0 +1,14 @@
+.boxcontainerprofile {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px;
+    text-align: center;
+}
+
+.boxcontainerprofile h2 {
+    color: white
+}
+
+.boxcontainerprofile h4 {
+  color: #b9d9e8;
+}

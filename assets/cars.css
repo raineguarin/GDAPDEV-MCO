@@ -1,0 +1,36 @@
+.boxcars {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+
+    margin-bottom: 20px;
+    border: 5px solid rgba(0, 0, 0, 0.03);
+    background-color: rgba(0, 0, 0, 0.03);
+    color: black;
+    padding: 15px;
+}
+
+.boxcars h2 {
+    align-items: flex-start;
+}
+
+.boxcars img {
+    width: 400px;
+    max-width: 100%;       
+    border-radius: 15px; 
+}
+
+.boxcarsinfo {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.boxcarsinfo h2 {
+  margin: 5%;
+  white-space: nowrap;
+}
+
+.boxcarsinfo h3 {
+  margin: 5%;
+}

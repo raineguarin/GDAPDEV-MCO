@@ -10,22 +10,36 @@ body {
   color: #0b1f2a;
 }
 
-.footerContainer{
-    width: 100%;
-    padding: 70px 30px 20px;
-    font-family: "Roboto", sans-serif;
-
-    display: flex;
-    justify-content: center;
-    gap: 40px;
+.footerContainer {
+  display: flex;
+  justify-content: center;
+  background-color: #2fa3c6;
+  align-items: center;
+  gap: 20px; 
+  padding: 20px 0;
+  margin-top: 75px;
 }
 
+.disable-link {
+  color: white;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.disable-link:hover {
+  color: gray;
+  transform: scale(1.03);
+}
 
 .name {
   font-family: "Montserrat", sans-serif;
   text-align: center;
   margin-top: 80px;
-  color: #eaf3f8;
+
 }
 
 
@@ -41,7 +55,6 @@ body {
   color: #b9d9e8;
 }
 
-
 .userDetails {
   background-color: #ffffff;
   max-width: 420px;
@@ -52,12 +65,10 @@ body {
   text-align: center;
 }
 
-
 .userDetails {
   font-size: 0.95rem;
   font-weight: 500;
 }
-
 
 input[type="text"] {
   width: 100%;
@@ -142,65 +153,6 @@ input[type="text"]:focus {
     padding: 80px;
 }
 
-.boxcontainerprofile {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 80px;
-    text-align: center;
-}
-
-.boxcontainerprofile h2 {
-    color: white
-}
-
-.boxcontainerprofile h4 {
-  color: #b9d9e8;
-}
-
-.boxfriends {
-    margin-bottom: 20px;
-    border: 5px solid rgba(0, 0, 0, 0.03);
-    background-color: rgba(0, 0, 0, 0.03);
-    color: black;
-}
-
-.boxcars {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-
-    margin-bottom: 20px;
-    border: 5px solid rgba(0, 0, 0, 0.03);
-    background-color: rgba(0, 0, 0, 0.03);
-    color: black;
-    padding: 15px;
-}
-
-.boxcars h2 {
-    align-items: flex-start;
-}
-
-.boxcars img {
-    width: 400px;
-    max-width: 100%;       
-    border-radius: 15px; 
-}
-
-.boxcarsinfo {
-  display: flex;
-  flex-direction: column;
-}
-
-
-.boxcarsinfo h2 {
-  margin: 5%;
-  white-space: nowrap;
-}
-
-.boxcarsinfo h3 {
-  margin: 5%;
-}
-
 .box h4 {
   color: #b9d9e8;
 }
@@ -232,29 +184,6 @@ input[type="text"]:focus {
     color: #555;
     border: 1px solid #ccc;
     border-radius: 4px;
-}
-
-.friendsheader {
-  color: #b9d9e8;
-  text-align: center;
-}
-
-.friendssubheader {
-  color: #b9d9e8;
-  text-align: center;
-  font-size: smaller;
-}
-
-.boxfriends h2 {
-  color: white
-}
-
-.boxfriends h4 {
-  color: #3db7dd
-}
-
-.boxfriends p {
-  color: black
 }
 
 .filter {
@@ -292,3 +221,4 @@ input[type="text"]:focus {
 .half h3 {
   padding-top: 50px;
 }
+
