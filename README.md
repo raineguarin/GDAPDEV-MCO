@@ -17,7 +17,7 @@
 - **Guarin, Raine Louise**
 - **Gutierrez, Michael Luis**
 - **Villamor, Allysa Luise**
-- 
+  
 ## Project Overview
 **PahiramKotse** is a web application designed for easy car rentals. Keeping track of large amounts of data such as car information and user information can be quite tasking. This application aims to address this issue for customers through the easy-to-understand user interface, where information they need is easily accessible and navigable. Administrators can also easily manipulate data through its features.
 
