@@ -8,7 +8,9 @@
     <body>
         <div class="header-flex">
             <div class="logo">
-                <img src="../assets/logo.png" width="300px">
+                <a href="homepage.html">`
+                    <img src="../assets/logo.png" width="300px">
+                </a>
             </div>
 
             <ul class="navlinks">
@@ -28,9 +30,8 @@
         <img src="../assets/profilepicture.png" width="100px">
         <h2> Profile Name </h2>
         <h4> Private Profile </h4>
-        <a href="homepage.html">
-            <h4 style="color:red; cursor: pointer;">Log Out</h4>
-        </a>
+        <h4 id="logoutbtn" style="color:red; cursor: pointer;">Log Out</h4>
+
 
         </div>
         <div class="profile-reviews">
@@ -53,5 +54,18 @@
         </div>
     </footer>
 
+    <div id="logout" class="Popup">
+        <div class="Popupcontent">
+            <h2>Log Out</h2>
+            <hr>
+            <p>Logging out?</p>
+            <div class="logoutbuttons" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+                <button class="cancel" id="logoutCancel">Cancel</button>
+                <button class="proceed" id="logoutConfirm" style="background-color: red;">Log Out</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/profile.js"></script>
     </body>
 </html>

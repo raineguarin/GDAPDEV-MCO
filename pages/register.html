@@ -3,6 +3,7 @@
     <head>
         <title>User Register page</title>
         <link rel="stylesheet" href="../assets/global.css">
+        <link rel = "stylesheet" href = "../assets/register.css">
     </head>
     
     <body>
@@ -16,31 +17,37 @@
         <div class="userDetails">
             Name:
             <div class="nameInput">
-                <input type="text">
+                <input type="text" id="regName" placeholder="e.g. Ashton Jude Ching">
+                <span id="nameError" class="error-msg"></span> 
             </div>
             
             Email:
             <div class="emailInput"> 
-                <input type="text">
+                <input type="text" id="regEmail" placeholder="example@email.com">
+                <span id="emailError" class="error-msg"></span> 
             </div>
             
             Number:
             <div class="numberInput">
-                <input type="text">
+                <input type="text" id="regNumber" placeholder="09123456789">
+                <span id="numberError" class="error-msg"></span>
             </div>
             
             Password:
-            <div class="passInput">
-                <input type="text">
+            <div class="passInput" style="position: relative;">
+                <input type="password" id="regPass" placeholder="At least 8 characters">
+                <span id="togglePass" style="position: absolute; right: 10px; top: 12px; cursor: pointer; font-size: 12px; color: #3db7dd;">Show Password</span>
+                <span id="passError" class="error-msg"></span> 
             </div>
 
             Profile Image:
             <div class="imageInput">
-                <input type="file" accept="image/*">
+                <input type="file" id="regImage" accept="image/*">
             </div>
             <br>
-            <button class="proceed" onclick="location.href='cars.html'">Proceed</button>
-
+            <button class="proceed" onclick="validateForm()">Proceed</button>
         </div>
+
+        <script src="../js/register.js"></script>
     </body>
 </html>

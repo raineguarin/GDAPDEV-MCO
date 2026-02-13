@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
         <title>Contact Us</title>
         <link rel = "stylesheet" href = "../assets/global.css">
         <link rel = "stylesheet" href = "../assets/cars.css">
@@ -10,7 +11,9 @@
 
         <div class="header-flex">
             <div class="logo">
-                <img src="../assets/logo.png" width="300px">
+                <a href="homepage.html">`
+                    <img src="../assets/logo.png" width="300px">
+                </a>
             </div>
 
             <ul class="navlinks">
@@ -72,7 +75,7 @@
                 <h3> 5-Seater</h3>
                 <h3> Available</h3>
                 <h3> Rentable</h3>
-                <a href="" class="disable-linkcars"> Click to see Reviews</a>
+                <a href="#" class="disable-linkcars" data-car="car1"> Click to see Reviews</a>
                 <button type="button" class="proceed" onclick="window.location.href='reserve-car.html'">
   Reserve
 </button>
@@ -87,7 +90,7 @@
                 <h3> 5-Seater</h3>
                 <h3> Not-Available</h3>
                 <h3> Rented </h3>
-                <a href="" class="disable-linkcars"> Click to see Reviews</a>
+                <a href="#" class="disable-linkcars" data-car="car2"> Click to see Reviews</a>
                 <button type="button" class="proceed" onclick="window.location.href='reserve-car.html'">
   Reserve
 </button>
@@ -102,7 +105,7 @@
                 <h3> 15-Seater</h3>
                 <h3> Available</h3>
                 <h3> Rentable</h3>
-                <a href="" class="disable-linkcars"> Click to see Reviews</a>
+                <a href="#" class="disable-linkcars" data-car="car3"> Click to see Reviews</a>
                 <button type="button" class="proceed" onclick="window.location.href='reserve-car.html'">
   Reserve
 </button>
@@ -119,5 +122,14 @@
         </div>
     </footer>
 
+    <div id="reviewPopup" class="popup">
+        <div class="Popupcontent">
+            <span class="reviewclose">&times;</span>
+            <h2 id="reviewTitle">Reviews</h2>
+            <hr>
+            <div id="reviewbody"></div>
+        </div>
+    </div>
+    <script src="../js/cars.js"></script>
     </body>
 </html>

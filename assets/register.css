@@ -1,0 +1,28 @@
+.userDetails {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    width: 400px;       
+    margin: 20px auto;  
+    color: black;         
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+
+.userDetails input {
+    width: 100%;   
+    padding: 10px;
+    margin-bottom: 5px;  
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; 
+}
+
+
+.error-msg {
+    color: red;
+    font-size: 12px;
+    display: block;
+    height: 18px; 
+    margin-bottom: 10px;
+}

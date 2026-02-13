@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
         <title>Reservations</title>
         <link rel="stylesheet" href="../assets/global.css">
         <link rel="stylesheet" href="../assets/reservations.css">
@@ -10,7 +11,9 @@
 
         <div class="header-flex">
             <div class="logo">
-                <img src="../assets/logo.png" width="300px">
+                <a href="homepage.html">`
+                    <img src="../assets/logo.png" width="300px">
+                </a>
             </div>
 
             <ul class="navlinks">
@@ -57,7 +60,7 @@
 
         <div class="name">
             <div class="book">
-                <button type="submit" class="proceed">
+                <button type="button" class="proceed" id="submitbtn">
                     Submit Booking
                 </button>
             </div>
@@ -70,5 +73,34 @@
         </div>
     </footer>
 
+    <div id="confirmation" class="popup">
+        <div class="Popupcontent">
+            <h2>Confirm Reservation</h2>
+            <hr>
+            <div id="rsrvpopbody">
+                <p>You are reserving the <strong>Honda Sedan</strong></p>
+                <p>Are you sure with your decision?</p>
+                <div style="text-align: right; margin-top: 20px;">
+                    <button class="cancel" id="cancelBtn">Cancel</button>
+                    <button type="button" button class="proceed" id="confirmpop">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="successPopup" class="popup">
+        <div class="Popupcontent">
+            <span class="successclose" onclick="document.getElementById('successPopup').style.display='none'">&times;</span>
+            <h2 style="color: #00ff00;">Success!</h2>
+            <hr>
+            <div id="successBody">
+                <p>Your reservation for the Honda Sedan has been confirmed.</p>
+                <button class="proceed" id="okBtn">Return</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="../js/reserve-cars.js"></script>
     </body>
 </html>
