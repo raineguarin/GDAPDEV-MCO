@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> PahiramKotseHP </title>
-    <link rel="stylesheet" href="../assets/global.css">
-    <link rel="stylesheet" href="../assets/homepage.css">
+    <link rel="stylesheet" href="/global.css">
+    <link rel="stylesheet" href="/homepage.css">
 </head>
 <body>
         <div class="name">
-            <img src="../assets/images/logo.png" width="600px">
+            <img src="/images/logo.png" width="600px">
             <div class="desc">
                 <h3> In need of a Car? Pahiram ka nalang! </h3>
             </div>
@@ -18,44 +18,33 @@
         <div class="home-flex">
         
         <div class="home-left">
-            <!--Those big buttons they throw at you to register/login-->
             <h2>Reliable cars for cheaper prices!</h2>
 
             <div class="name">
                 <div class="proceed">
-                    <a href="register.html" class="regbtn">Register Now!</a>
+                    <a href="/register" class="regbtn">Register Now!</a>
                 </div>
                 <br>
                 <br>
                 <div class = "footer">Already Registered?</div>
                 <div class="proceed">
-                    <a href="login.html" class="regbtn">Login Now!</a>
+                    <a href="/login" class="regbtn">Login Now!</a>
                 </div>
                 
             </div>
         </div>
 
     <div class="home-right">
-    <!--Basically just a section showing the most rented vehicles-->
         <section class="carssection">
             <h2>The Customers' Choice!</h2>
+                {{#each featuredCars}}
                 <div class="carsquare">
-                    <h3>Sedan</h3>
-                    <p>$1/day</p>
+                    <h3>{{this.carType}}</h3>
+                    <p>${{this.dailyRate}}/day</p>
                     <button class="carbtn">View Details</button>
                 </div>
                 <br> <br> <br>
-                <div class="carsquare">
-                    <h3>SUV</h3>
-                    <p>$2/day</p>
-                    <button class="carbtn">View Details</button>
-                </div>
-                <br> <br> <br>
-                <div class="carsquare">
-                    <h3>Van</h3>
-                    <p>$3/day</p>
-                    <button class="carbtn">View Details</button>
-                </div>
+                {{/each}}
         </section>
     </div>
     </div>
@@ -63,8 +52,8 @@
     <footer>
         <div class="footerContainer">
             <p> This is an MCO project for GDAPDEV XX22 by Group 4. </p>
-            <a href="contact-us.html" class="disable-link"> Contact Us</a>
-            <a href="admin-homepage.html" class="disable-link"> For Admins</a>
+            <a href="/contact-us" class="disable-link"> Contact Us</a>
+            <a href="/admin-homepage" class="disable-link"> For Admins</a>
         </div>
     </footer>
 </body>
