@@ -64,10 +64,15 @@ The backend is currently being implemented and being tested via server deploymen
 ## Current Repository Structure
 ``
 GDAPDEV-MCO/
+
 │   .gitignore
+
 │   app.js
+
 │   LICENSE
+
 │   package-lock.json
+
 │   package.json
 │   README.md
 │
