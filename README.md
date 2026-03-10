@@ -70,7 +70,7 @@ The backend is currently being implemented and being tested via server deploymen
    ```npm install express express-handlebars```
 4. Start the server using the following command
 
-   ```node app,js```
+   ```node app.js```
 
 ## Current Repository Structure
 
