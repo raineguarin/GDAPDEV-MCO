@@ -51,19 +51,26 @@ The backend is currently being implemented and being tested via server deploymen
 
 ## Setup Instructions
 1. Clone the repository
-   ``git clone "https://github.com/raineguarin/GDAPDEV-MCO"
-   cd GDAPDEV-MCO``
+
+   ```
+   git clone "https://github.com/raineguarin/GDAPDEV-MCO"
+   
+   cd GDAPDEV-MCO
+   ```
 2. Set up the database
    - Via MongoDB Compass IDE:
        1. Create a new connection
-       2. Paste this URI: ``mongodb+srv://PahiramKoAdmin:Group4Apdev@pahiramkotse.g6rovco.mongodb.net/pahiramKotseDB?retryWrites=true&w=majority``
+       2. Paste this URI:
+       ```mongodb+srv://PahiramKoAdmin:Group4Apdev@pahiramkotse.g6rovco.mongodb.net/pahiramKotseDB?retryWrites=true&w=majority```
        3. Press **Save and Connect**
     
    - Via MongoDB Atlas:
 3. Install Handlebars via Node.js in the terminal (make sure it is in the repository)
-   ``npm install express express-handlebars``
+
+   ```npm install express express-handlebars```
 4. Start the server using the following command
-   ``node app,js``
+
+   ```node app,js```
 
 ## Current Repository Structure
 
