@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Home - PahiramKotse</title>
-    <link rel="stylesheet" href="../assets/global.css">
-    <link rel="stylesheet" href="../assets/homepage.css">
+    <link rel="stylesheet" href="/global.css">
+    <link rel="stylesheet" href="/homepage.css">
 </head>
 <body>
 
     <div class="header-flex">
         <div class="logo">
-            <img src="../assets/images/logo.png" width="300px">
+            <img src="/images/logo.png" width="300px">
         </div>
         <ul class="navlinks">
             <li><h3>Admin Page</h3></li>
             <li>
-                <a href="admin-profile.html">
-                <img src="../assets/profilepicture.png" alt="Profile" width="40px" height="40px" style="border-radius:50%;">
+                <a href="/admin-profile">
+                <img src="/images/profilepicture.png" alt="Profile" width="40px" height="40px" style="border-radius:50%;">
                 </a>
             </li>
          </ul>
@@ -29,17 +29,17 @@
             <h2>Administrator Dashboard</h2>
 
             <div class="proceed">
-                <a href="manage-users.html" class="regbtn">Manage Users</a>
+                <a href="/manage-users" class="regbtn">Manage Users</a>
             </div>
             <br><br>
 
             <div class="proceed">
-                <a href="manage-vehicles.html" class="regbtn">Manage Vehicles</a>
+                <a href="/manage-vehicles" class="regbtn">Manage Vehicles</a>
             </div>
             <br><br>
 
             <div class="proceed">
-                <a href="manage-reservations.html" class="regbtn">Manage Reservations</a>
+                <a href="/manage-reservations" class="regbtn">Manage Reservations</a>
             </div>
 
         </div>
@@ -51,24 +51,23 @@
                 <div class="cards-container">
                     <div class="carsquare">
                         <h3>Total Users</h3>
-                        <p>45 Registered Customers</p>
+                        <p>{{totalUsers}} Registered Customers</p>
                     </div>
 
                     <div class="carsquare">
                         <h3>Active Reservations</h3>
-                        <p>12 Ongoing Bookings</p>
+                        <p>{{activeReservations}} Ongoing Bookings</p>
                     </div>
 
                     <div class="carsquare">
                         <h3>Available Vehicles</h3>
-                        <p>18 Cars Ready</p>
+                        <p>{{availableVehicles}} Cars Ready</p>
                     </div>
                 </div>
             </section>
         </div>
 
     </div>
-
 
 </body>
 </html>
