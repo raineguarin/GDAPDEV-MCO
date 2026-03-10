@@ -12,7 +12,7 @@ logoutCancel.onclick = function() {
 };
 
 logoutConfirm.onclick = function() {
-    window.location.href = "homepage.html";
+    window.location.href = "/logout";
 };
 
 window.onclick = function(event) {

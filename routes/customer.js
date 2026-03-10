@@ -42,7 +42,13 @@ router.post('/login', async (req, res) => {
         
         if(userFound){
             if(userFound.password == password){
-                res.redirect('/cars'); // after login should go to cars page
+                req.session.userId = userFound._id;
+                
+                if (userFound.role === 'Admin') {
+                    res.redirect('/admin-homepage'); 
+                } else {
+                    res.redirect('/cars'); 
+                }
                 
             } else {
                 res.status(401).send("Invalid Password");

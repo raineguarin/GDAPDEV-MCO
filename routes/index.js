@@ -43,12 +43,12 @@ router.get('/admin-homepage', async (req, res) => {
 // Admin Profile
 router.get('/admin-profile', async (req, res) => {
     try {
-        // 2. ROUTE PROTECTION: Check if they have a session ID
+        //check if they have a session ID
         if (!req.session.userId) {
             return res.redirect('/login'); 
         }
 
-        const currentUser = await User.findById(req.session.userId);
+        const currentUser = await user.findById(req.session.userId);
 
         if (!currentUser) {
             return res.redirect('/login');
@@ -62,4 +62,16 @@ router.get('/admin-profile', async (req, res) => {
     }
 });
 
+router.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error("Error logging out:", err);
+            return res.status(500).send("Could not log out.");
+        }
+        
+        res.clearCookie('connect.sid'); 
+        
+        res.redirect('/'); 
+    });
+});
 module.exports = router;
