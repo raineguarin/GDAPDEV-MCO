@@ -62,86 +62,66 @@ The backend is currently being implemented and being tested via server deploymen
    ``node app,js``
 
 ## Current Repository Structure
-``
-GDAPDEV-MCO/
 
-│   .gitignore
-
-│   app.js
-
-│   LICENSE
-
-│   package-lock.json
-
-│   package.json
-│   README.md
-│
-├───assets                               # CSS stylesheets
-│   │   cars.css
-│   │   contact-us.css
-│   │   friends.css
-│   │   global.css
-│   │   homepage.css
-│   │   manage-reservations.css
-│   │   manage-users.css
-│   │   manage-vehicles.css
-│   │   profile.css
-│   │   register.css
-│   │   reservations.css
-│   │   search.css
-│   │
-│   └───images                           # Images used
-│           ford.avif
-│           logo.png
-│           profilepicture.png
-│           sedan.png
-│           suv.png
-│
-├───js                                   # JavaScript logic handling
-│       cars.js
-│       friends.js
-│       manage-reservations.js
-│       manage-users.js
-│       profile.js
-│       register.js
-│       reserve-cars.js
-│
-├───model                                # Objects
-│       reservation.js
-│       user.js
-│       vehicle.js
-│
-├───node_modules                         # Modules for Node (inimized document for length)
-├───pages but put HBS in view folder     # Initial HTML pages
-│       admin-homepage.html
-│       admin-profile.html
-│       cars.html
-│       contact-us.html
-│       friends.html
-│       homepage.html
-│       login.html
-│       manage-reservations.html
-│       manage-users.html
-│       manage-vehicles.html
-│       profile.html
-│       register.html
-│       reservations.html
-│       reserve-car.html
-│       search.html
-│
-├───routes                                # Routers
-│       customer.js
-│       index.js
-│       reservation.js
-│       user.js
-│       vehicle.js
-│
-└───view                                 # Handlebars pages
-        admin-homepage.hbs
-        homepage.hbs
-        manage-users.hbs
-        register.hbs
-``
-
+```GDAPDEV-MCO/
+├── assets/                               # Static files (CSS & Media)
+│   ├── images/                           # Asset images
+│   │   ├── ford.avif
+│   │   ├── logo.png
+│   │   ├── profilepicture.png
+│   │   ├── sedan.png
+│   │   └── suv.png
+│   ├── cars.css
+│   ├── contact-us.css
+│   ├── friends.css
+│   ├── global.css
+│   ├── homepage.css
+│   ├── manage-reservations.css
+│   ├── manage-users.css
+│   ├── manage-vehicles.css
+│   ├── profile.css
+│   ├── register.css
+│   ├── reservations.css
+│   └── search.css
+├── js/                                   # Client-side logic
+│   ├── cars.js
+│   ├── friends.js
+│   ├── manage-reservations.js
+│   ├── manage-users.js
+│   ├── profile.js
+│   ├── register.js
+│   └── reserve-cars.js
+├── model/                                # Mongoose Schemas
+│   ├── reservation.js
+│   ├── user.js
+│   └── vehicle.js
+├── routes/                               # Express Router logic
+│   ├── customer.js
+│   ├── index.js
+│   ├── reservation.js
+│   ├── user.js
+│   └── vehicle.js
+├── views/                                # Handlebars templates
+│   ├── admin-homepage.hbs
+│   ├── admin-profile.hbs
+│   ├── cars.hbs
+│   ├── contact-us.hbs
+│   ├── friends.hbs
+│   ├── homepage.hbs
+│   ├── login.hbs
+│   ├── manage-reservations.hbs
+│   ├── manage-users.hbs
+│   ├── manage-vehicles.hbs
+│   ├── profile.hbs
+│   ├── register.hbs
+│   ├── reservations.hbs
+│   ├── reserve-car.hbs
+│   └── search.hbs
+├── .gitignore                            
+├── app.js                                # Main entry point
+├── LICENSE                               
+├── package.json                          
+├── package-lock.json                    
+└── README.md                             # Project documentation ```
 
 
