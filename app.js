@@ -30,11 +30,13 @@ const indexRoutes = require('./routes/index');
 const userRoutes = require('./routes/user');
 const vehicleRoutes = require('./routes/vehicle');
 const reservationRoutes = require('./routes/reservation');
+const customerRoutes = require('./routes/customer');
 
 app.use('/', indexRoutes);
 app.use('/', userRoutes);    
 app.use('/', vehicleRoutes); 
 app.use('/', reservationRoutes); 
+app.use('/', customerRoutes);
 
 // SERVER START
 const PORT = 3000;
