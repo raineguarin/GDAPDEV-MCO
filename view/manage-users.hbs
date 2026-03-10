@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Users</title>
+    {{!-- Asset paths updated --}}
+    <link rel="stylesheet" href="/manage-users.css">
+    <link rel="stylesheet" href="/global.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="header-flex">
+        <div class="logo">
+            <img src="/images/logo.png" width="300px">
+        </div>
+        <ul class="navlinks">
+            {{!-- Navigation links updated --}}
+            <li><a href="/admin-homepage">To Dashboard</a></li>
+            <li>
+                <a href="/admin-profile">
+                <img src="/images/profilepicture.png" alt="Profile" width="40px" height="40px" style="border-radius:50%;">
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="name">
+        <h1>Manage Users</h1>
+        <p>Admin</p>
+    </div>
+
+    <div class="boxcontainer">
+
+        <div class="top-bar">
+            <div class="search-user">
+                <input type="text" placeholder="Username/Email">
+            </div>
+
+            <div class="user-actions">
+                <button><i class="fa-solid fa-user-plus"></i> Add Customer</button>
+                <button><i class="fa-solid fa-user-shield"></i> Add Admin</button>
+            </div>
+        </div>
+
+        <div class="users-grid">
+            {{#each users}}
+            <div class="user-card">
+                <div class="user-info">
+                    <h2>{{this.name}}</h2>
+                    <p><strong>Username:</strong> {{this.username}}</p>
+                    <p><strong>Email:</strong> {{this.email}}</p>
+                    <p><strong>Role:</strong> {{this.role}}</p>
+                    <p>
+                        <strong>License:</strong> 
+                        {{#if this.isLicenseVerified}}
+                            <span class="verified">Verified</span>
+                        {{else}}
+                            <span class="not-verified">Not Verified</span>
+                        {{/if}}
+                    </p>
+                    <p>
+                        <strong>Status:</strong> 
+                        {{#if (eq this.status 'Suspended')}}
+                            <span class="suspended">Suspended</span>
+                        {{else}}
+                            <span class="active">Active</span>
+                        {{/if}}
+                    </p>
+                </div>
+
+                <div class="user-buttons">
+                    {{#if this.isLicenseVerified}}
+                        <button class="verify-btn">Verified</button>
+                    {{else}}
+                        <button class="verify-btn">Verify License</button>
+                    {{/if}}
+
+                    {{#if (eq this.status 'Suspended')}}
+                        <button class="activate-btn">Activate</button>
+                    {{else}}
+                        <button class="suspend-btn">Suspend</button>
+                    {{/if}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+
+    <footer>
+        <div class="footerContainer">
+            <a href="/manage-users" class="disable-link">Manage Users</a>
+            <a href="/manage-vehicles" class="disable-link">Manage Vehicles</a>
+            <a href="/manage-reservations" class="disable-link">Manage Reservations</a>
+        </div>
+    </footer>
+
+    <div id="manageconf" class="popup">
+        <div class="Popupcontent">
+            <h2 id="managuserTitle">Confirm Action</h2>
+            <hr>
+            <div id="managuserBody">
+                <p>Are you sure you want to <strong id="actionText"></strong> user <strong id="targetUser"></strong>?</p>
+                <div style="text-align: right; margin-top: 20px;">
+                    <button class="cancel" id="managuserCancel">No, Go Back</button>
+                    <button class="proceed" id="managuserConfirm">Yes, Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="/manage-users.js"></script>
+</body>
+</html>

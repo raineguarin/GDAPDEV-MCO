@@ -27,7 +27,14 @@ app.use(express.urlencoded({ extended: true }));
 
 // ROUTE HANDLERS
 const indexRoutes = require('./routes/index');
+const userRoutes = require('./routes/user');
+const vehicleRoutes = require('./routes/vehicle');
+const reservationRoutes = require('./routes/reservation');
+
 app.use('/', indexRoutes);
+app.use('/', userRoutes);    
+app.use('/', vehicleRoutes); 
+app.use('/', reservationRoutes); 
 
 // SERVER START
 const PORT = 3000;
