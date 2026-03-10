@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const user = require('../model/user');
+const User = require('../model/user');
 
 router.get('/register', (req, res) => {
     res.render('register');
@@ -11,7 +11,7 @@ router.get('/register', (req, res) => {
 // Register
 router.post('/register', async (req, res) => {
     try {
-        const { name, email, number, password } = req.body;
+        const { name, email, number, password, username } = req.body;
 
         const newUser = new User({
             name,
