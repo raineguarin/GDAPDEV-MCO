@@ -40,9 +40,13 @@ Object.keys(inputs).forEach(id => {
 });
 
 // new logic for submission
-async function validateForm() {
+async function validateForm(event) {
+    // Prevents default HTML form submission
+    if (event) event.preventDefault();
+
     let allValid = true;
     
+    // Validate text inputs
     Object.keys(inputs).forEach(id => {
         const inputEl = document.getElementById(id);
         const errorMessage = inputs[id].validate(inputEl.value);
@@ -54,28 +58,22 @@ async function validateForm() {
     });
 
     if (allValid) {
-        const formData = {
-            name: document.getElementById('regName').value,
-            email: document.getElementById('regEmail').value,
-            number: document.getElementById('regNumber').value,
-            password: document.getElementById('regPass').value,
-            username: document.getElementById('regEmail').value // username is email
-        };
+        // Uses FormData API for automatic file handling
+        const formElement = document.getElementById('registrationForm');
+        const formData = new FormData(formElement);
 
         try {
-            // sending data to customer router
             const response = await fetch('/register', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: formData 
             });
-
-            const result = await response.json();
 
             if (response.ok) {
                 alert("Account created successfully!");
-                window.location.href = "/login"; // login redirext
-                alert("Registration Error: " + result.error);
+                window.location.href = "/login";
+            } else {
+                const result = await response.json();
+                alert("Registration Error: " + (result.error || "Something went wrong"));
             }
         } catch (error) {
             console.error("Fetch error:", error);
@@ -83,6 +81,9 @@ async function validateForm() {
         }
     }
 }
+
+// 4. Attach the event listener to the form instead of just the button
+document.getElementById('registrationForm').addEventListener('submit', validateForm);
 
 document.getElementById("regNumber").addEventListener("keypress", function(e) {
     if (e.which < 48 || e.which > 57) e.preventDefault(); 
