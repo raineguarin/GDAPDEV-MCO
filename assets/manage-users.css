@@ -149,3 +149,139 @@
   background-color: rgba(255, 255, 255, 0.12); 
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
+
+.search-user input {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    width: 300px;
+    background: white;
+    color: black;
+}
+
+.icons {
+    display: flex;
+    gap: 10px;
+}
+
+.icons button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s opacity;
+}
+
+.btn-add {
+    background-color: #3db7dd;
+}
+
+.btn-edit {
+    background-color: #f0ad4e;
+}
+
+.btn-delete {
+    background-color: #ff4d4d;
+}
+
+.icons button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #555;
+}
+
+.filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.filters select {
+    flex: 1;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: white;
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.user-card.selected {
+    border: 2px solid #3db7dd; 
+    background-color: rgba(61, 183, 221, 0.15); 
+    transform: translateY(-4px); 
+    box-shadow: 0 8px 16px rgba(61, 183, 221, 0.2); 
+}
+
+.active-text, .verified-text {
+    color: #5cb85c;
+    font-weight: bold;
+}
+
+.suspended-text, .not-verified-text, .warning-text {
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+#userFormModal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+#userFormModal .Popupcontent {
+    background-color: #1a1a1a;
+    margin: 5% auto; 
+    padding: 25px;
+    width: 400px; 
+    max-width: 85%;
+    border: 1px solid #00adef;
+    border-radius: 12px;
+    color: white;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.form-popup form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.form-popup label {
+    color: #b9d9e8;
+    font-size: 14px;
+}
+
+.form-popup input, .form-popup select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #00adef;
+    background: #1a1a1a;
+    color: white;
+}
+
+.modal-buttons {
+    text-align: right;
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.nav-profile-pic {
+    border-radius: 50%;
+}
