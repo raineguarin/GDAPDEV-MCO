@@ -29,42 +29,30 @@
     </div>
 
     <h2 class="friendsheader">Reviews from your Friends</h2>
-        <div class="boxcontainer">
-        <div class="boxfriends">
-            <h2> John</h2>
-            <h4 >Rented Van </h4>
-            <p> Vehicle perfomed exceptionally, no problems encountered, would recommend!</p>
-        </div>
-        <div class="boxfriends">
-            <h2> Josie</h2>
-            <h4>Rented SUV</h4>
-            <p> Very comfortable and spacious, it felt like I was driving a hyper-futuristic vehicle.</p>
-        </div>
 
+    <div class="boxcontainer">
+        {{#each friendReviews}}
         <div class="boxfriends">
-            <h2> Jeremy</h2>
-            <h4>Rented Van</h4>
-            <p> Encountered some problems such as a flat tire upon picking-up the vehicle, other than that, a very smooth experience!</p>
+            <h2>{{this.user.name}}</h2>
+            <h4>{{this.car.brand}} {{this.car.model}}</h4>
+            <p>{{this.title}}</p>
+            <p>{{this.description}}</p>
         </div>
+    {{/each}}
 
-        <br><h2 class="friendsheader">Reviews from other People</h2>
+    <h2 class="friendsheader">Reviews from other People</h2>
 
+    <div id="friendAdd" class="friendNotification"> </div>
+
+        {{#each otherReviews}}
         <div class="boxfriends">
-            <h2> James</h2>
-            <h4>Rented Van</h4>
-            <p> Was able to fit my entire family hahahahahhahahahahah very nice</p>
-              <br>
-            <button class="addfriend">Add Friend</button>
+            <h2>{{this.user.name}}</h2>
+            <h4>{{this.car.brand}} {{this.car.model}}</h4>
+            <p>{{this.title}}</p>
+            <p>{{this.description}}</p>
+            <button class="addfriend" data-userid="{{this.user._id}}">Add Friend</button>
         </div>
-
-        <div class="boxfriends">
-            <h2> Jake!</h2>
-            <h4>Rented Sedan</h4>
-            <p> 10/10 would rent again </p>
-            <br>
-            <button class="addfriend">Add Friend</button>
-        </div>
-
+    {{/each}}
     </div>
 
     <footer>
@@ -75,5 +63,7 @@
     </footer>
 
     </div>
+
+    <script src="/friends.js"></script>
 </body>
 </html>
