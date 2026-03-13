@@ -22,7 +22,7 @@
             <li><a href="/reservations">My Reservations</a></li>
             <li>
                 <a href="/profile">
-                    <img src="/images/pfps/{{user.profilePicture}}" alt="Profile" width="40px" height="40px" style="border-radius:50%;">
+                    <img src="/images/{{user.profilePicture}}" alt="Profile" width="40px" height="40px" style="border-radius:50%; object-fit: cover;">
                 </a>
             </li>
         </ul>
@@ -30,7 +30,9 @@
 
     <div class="boxcontainerprofile">
         <div class="profile-info">
-            <img src="/images/pfps/{{user.profilePicture}}" width="100px" alt="Profile Picture">
+            <a href="/profile">
+                <img src="/images/{{user.profilePicture}}" alt="Profile" width="40px" height="40px" style="border-radius:50%; object-fit: cover;">
+            </a>
             <h2>{{user.name}}</h2>
             <h4>Private Profile</h4>
             <h4 id="logoutbtn" style="color:red; cursor: pointer;">Log Out</h4>

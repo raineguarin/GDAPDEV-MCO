@@ -8,7 +8,7 @@ const path = require('path');
 const fs = require('fs');
 
 // This allows the user to upload an img from their local machine
-const uploadDir = path.join(__dirname, 'assets', 'images', 'pfps');
+const uploadDir = path.join(__dirname, '../assets/images/pfps');
 
 // This makes the directory if it doesn't exist
 if (!fs.existsSync(uploadDir)) {
@@ -31,15 +31,12 @@ router.get('/register', (req, res) => {
     res.render('register');
 });
 
+
 // Register
 router.post('/register', upload.single('profilePic'), async (req, res) => {
     try {
         const { name, email, number, password, username } = req.body;
         
-        // Stores only the filename or a relative web path in the DB
-        // If the req.file exists, store the generated filename, otherwise use the default
-        const imagePath = req.file ? req.file.filename : 'default.jpg';
-
         const newUser = new user({
             name,
             email,
@@ -52,8 +49,9 @@ router.post('/register', upload.single('profilePic'), async (req, res) => {
 
         await newUser.save();
         
+        // 2. Change this from res.redirect to res.status(200).json
+        res.status(200).json({ message: "Account created successfully" });
         
-        res.redirect('/login');
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Server Error during registration" });

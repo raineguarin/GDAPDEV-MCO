@@ -39,50 +39,52 @@ Object.keys(inputs).forEach(id => {
     });
 });
 
-// new logic for submission
-async function validateForm() {
+async function validateForm(event) {
+    event.preventDefault(); 
+
     let allValid = true;
     
     Object.keys(inputs).forEach(id => {
         const inputEl = document.getElementById(id);
-        const errorMessage = inputs[id].validate(inputEl.value);
-        document.getElementById(inputs[id].errorId).innerText = errorMessage;
-        if (errorMessage) {
-            allValid = false;
-            inputEl.style.border = "2px solid #ff4d4d";
+        if (inputEl) {
+            const errorMessage = inputs[id].validate(inputEl.value);
+            document.getElementById(inputs[id].errorId).innerText = errorMessage;
+            if (errorMessage) {
+                allValid = false;
+                inputEl.style.border = "2px solid #ff4d4d";
+            }
         }
     });
 
     if (allValid) {
-        const formData = {
-            name: document.getElementById('regName').value,
-            email: document.getElementById('regEmail').value,
-            number: document.getElementById('regNumber').value,
-            password: document.getElementById('regPass').value,
-            username: document.getElementById('regEmail').value // username is email
-        };
+        const formElement = document.getElementById('registrationForm');
+        const formData = new FormData(formElement);
+        
+        formData.append("username", document.getElementById("regEmail").value);
 
         try {
-            // sending data to customer router
             const response = await fetch('/register', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: formData 
             });
-
-            const result = await response.json();
 
             if (response.ok) {
                 alert("Account created successfully!");
-                window.location.href = "/login"; // login redirext
+                window.location.href = "/login";
             } else {
-                alert("Registration Error: " + result.error);
+                const result = await response.json();
+                alert("Registration Error: " + (result.error || "Something went wrong"));
             }
         } catch (error) {
             console.error("Fetch error:", error);
             alert("Could not connect to the server.");
         }
     }
+}
+
+const regForm = document.getElementById('registrationForm');
+if (regForm) {
+    regForm.addEventListener('submit', validateForm);
 }
 
 document.getElementById("regNumber").addEventListener("keypress", function(e) {
