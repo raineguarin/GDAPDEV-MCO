@@ -2,92 +2,92 @@
 <html>
 <head>
     <title>Manage Reservations</title>
-    <link rel="stylesheet" href="/manage-reservations.css">
+    <link rel="stylesheet" href="/manage-reservations.css"> 
     <link rel="stylesheet" href="/global.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 </head>
 
 <body>
-
     <div class="header-flex">
         <div class="logo">
-            <img src="/images/logo.png" width="300px">
+            <img src="/images/logo.png" width="300px" alt="Logo">
         </div>
         <ul class="navlinks">
-            <li><a href="/admin-homepage">To Dashboard</a></li>
+           <li><a href="/admin-homepage">To Dashboard</a></li>
             <li>
                 <a href="/admin-profile">
-                <img src="/profilepicture.png" alt="Profile" width="40px" height="40px" style="border-radius:50%;">
+                    <img src="/images/{{user.profilePicture}}" alt="Profile" width="40px" height="40px" style="border-radius:50%; object-fit: cover;">
                 </a>
             </li>
         </ul>
     </div>
-                
+
     <div class="name">
         <h1>Manage Reservations</h1>
         <p>Admin</p>
     </div>
 
     <div class="boxcontainer">
+        
+        <div class="top-bar">
+            <div class="search-user">
+                <input type="text" id="searchInput" placeholder="Search Customer or Vehicle...">
+            </div>
 
-        <div class="icons">
-            <button><i class="fa-solid fa-plus"></i> Walk-in Reservation</button>
-            <button><i class="fa-solid fa-pen-to-square"></i> Edit</button>
-            <button><i class="fa-solid fa-check"></i> Confirm Payment</button>
-            <button><i class="fa-solid fa-ban"></i> Cancel</button>
+            <div class="icons">
+                <button id="addBtn" class="btn-add"><i class="fa-solid fa-plus"></i> Walk-in Reservation</button>
+                <button id="approveBtn" class="btn-edit" style="background-color: #28a745;" disabled><i class="fa-solid fa-check"></i> Approve</button>
+                <button id="completeBtn" class="btn-edit" style="background-color: #3db7dd;" disabled><i class="fa-solid fa-flag-checkered"></i> Complete</button>
+                <button id="cancelBtn" class="btn-delete" style="background-color: #ff9800;" disabled><i class="fa-solid fa-ban"></i> Cancel</button>
+            </div>
         </div>
 
         <div class="filters">
-            <select>
-                <option>Time</option>
-                <option>Morning</option>
-                <option>Afternoon</option>
-                <option>Evening</option>
+
+            <select id="filterStatus">
+                <option value="all">All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+                <option value="Cancelled">Cancelled</option>
+                <option value="Completed">Completed</option>
             </select>
 
-            <select>
-                <option>Status</option>
-                <option>Pending</option>
-                <option>Approved</option>
-                <option>Cancelled</option>
-                <option>Completed</option>
-            </select>
-
-            <select>
-                <option>Payment</option>
-                <option>Unpaid</option>
-                <option>Down Payment</option>
-                <option>Fully Paid</option>
+            <select id="filterPayment">
+                <option value="all">All Payments</option>
+                <option value="Unpaid">Unpaid</option>
+                <option value="Down Payment">Down Payment</option>
+                <option value="Fully Paid">Fully Paid</option>
             </select>
         </div>
 
-        <div class="reservation-grid">
-           {{#each reservations}}
-            <div class="reservation-card">
+        <div class="reservation-grid" id="reservationGrid">
+            {{#each reservations}}
+            <div class="reservation-card" 
+                 data-id="{{this._id}}" 
+                 data-customer="{{this.customer.name}}" 
+                 data-vehicle="{{this.vehicle.brand}} {{this.vehicle.model}}"
+                 data-time="{{this.time}}"
+                 data-status="{{this.status}}"
+                 data-payment="{{this.paymentStatus}}">
+                 
                 <div class="reservation-info">
                     <h2>Reservation ID: {{this._id}}</h2>
-                   <p><strong>Customer:</strong> {{this.customer.name}}</p>
+                    <p><strong>Customer:</strong> {{this.customer.name}}</p>
                     <p><strong>Vehicle:</strong> {{this.vehicle.brand}} {{this.vehicle.model}}</p>
                     <p><strong>Date:</strong> {{this.date}}</p>
                     <p><strong>Time:</strong> {{this.time}}</p>
-                    <p><strong>Status:</strong> {{this.status}}</p>
-                    <p><strong>Payment:</strong> {{this.paymentStatus}}</p>
-                </div>
-
-                <div class="reservation-actions">
-                    {{#if (eq this.status 'Pending')}}
-                        <button class="approve">Approve</button>
-                        <button class="decline">Decline</button>
-                    {{/if}}
-
-                    {{#if (eq this.status 'Approved')}}
-                        <button class="complete">Completed</button>
-                        <button class="cancel">Cancel</button>
-                    {{/if}}
+                    
+                    <p>
+                        <strong>Status:</strong>
+                        <span class="status-{{this.status}}">{{this.status}}</span>
+                    </p>
+                    <p>
+                        <strong>Payment:</strong>
+                        <span class="payment-{{this.paymentStatus}}">{{this.paymentStatus}}</span>
+                    </p>
                 </div>
             </div>
             {{/each}}
-
         </div>
     </div>
 
@@ -99,21 +99,50 @@
         </div>
     </footer>
 
-    <div id="managres" class="popup">
-        <div class=Popupcontent>
+    <div id="walkinModal" class="popup">
+        <div class="Popupcontent form-popup">
+            <h2>Add Walk-in Reservation</h2>
+            <hr>
+            <form id="walkinForm">
+                <label>Customer Email:</label>
+                <input type="email" id="walkinCustomer" placeholder="Customer's registered email" required>
+
+                <label>Vehicle:</label>
+                    <select id="walkinVehicle" required>
+                        <option value="" disabled selected>-- Select a Vehicle --</option>
+                        {{#each vehicles}}
+                            <option value="{{this._id}}">{{this.brand}} {{this.model}} ({{this.carType}})</option>
+                        {{/each}}
+                    </select>
+
+                <label>Date:</label>
+                <input type="date" id="walkinDate" required>
+
+                <label>Time:</label>
+                <input type="text" id="walkinTime" placeholder="e.g. 9:00 AM - 12:00 PM" required>
+
+                <div class="modal-buttons">
+                    <button type="button" class="cancel" id="walkinCancelBtn">Cancel</button>
+                    <button type="submit" class="proceed btn-add" id="walkinSaveBtn">Save Reservation</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="manageconf" class="popup">
+        <div class="Popupcontent">
             <h2 id="managresTitle">Confirm Action</h2>
             <hr>
-            <div id="managresBody">
-                <p>Are you sure you want to <strong id="managresText"></strong> 
-                <br><span id="managresTarget" style="color: #3db7dd;"></span>?</p>
-                <div style="text-align: right; margin-top: 20px;">
-                    <button class="cancel" id="managresCancel">No</button>
-                    <button class="proceed" id="managresConfirm">Yes, Proceed</button>
+            <div>
+                <p>Are you sure you want to <strong id="managresText"></strong> the reservation for <br><strong id="managresTarget" style="color: #3db7dd;"></strong>?</p>
+                <div class="modal-buttons" style="margin-top: 20px;">
+                    <button class="cancel" id="managresCancel">No, Go Back</button>
+                    <button class="proceed" id="managresConfirm">Yes, Confirm</button>
                 </div>
             </div>
         </div>
     </div>
 
-<script src="/manage-reservations.js"></script>
+    <script src="/manage-reservations.js"></script>
 </body>
 </html>

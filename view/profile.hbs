@@ -40,11 +40,20 @@
         
         <div class="profile-reviews">
             <h4>Your Reviews</h4>
-            <div class="boxfriends">
-                <h2>Josie</h2>
-                <h4>Rented SUV</h4>
-                <p>Very comfortable and spacious, it felt like I was driving a hyper-futuristic vehicle.</p>
-            </div>
+            
+            {{#if reviews.length}}
+                {{#each reviews}}
+                <div class="boxfriends">
+                    <h2>{{this.title}}</h2> 
+                    
+                    <h4 style="color: #3db7dd;">Rented {{this.car.brand}} {{this.car.model}}</h4> 
+                    
+                    <p>{{this.description}}</p>
+                </div>
+                {{/each}}
+            {{else}}
+                <p style="color: #b9d9e8; font-style: italic; margin-top: 15px;">You haven't written any reviews yet.</p>
+            {{/if}}
         </div>
     </div>
 

@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const hbs = require('hbs');
 const session = require('express-session');
-
+const user = require('./model/user');
 const app = express();
 
 // DATABASE CONNECTION 
@@ -42,6 +42,19 @@ app.use(session({
     saveUninitialized: false,
     cookie: { secure: false } // Set to false because localhost
 }));
+
+app.use(async (req, res, next) => {
+    if (req.session && req.session.userId) {
+        try {
+            const currentUser = await user.findById(req.session.userId);
+            
+            res.locals.user = currentUser; 
+        } catch (err) {
+            console.error("Error fetching global user:", err);
+        }
+    }
+    next(); 
+});
 
 // ROUTE HANDLERS
 const indexRoutes = require('./routes/index');

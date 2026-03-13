@@ -6,6 +6,7 @@ const user = require('../model/user');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const review = require('../model/review'); 
 
 // This allows the user to upload an img from their local machine
 const uploadDir = path.join(__dirname, '../assets/images/pfps');
@@ -97,13 +98,12 @@ router.get('/profile', async (req, res) => {
             return res.redirect('/login'); 
         }
 
-        const userFound = await user.findById(req.session.userId);
+        const userReviews = await review.find({ user: req.session.userId }).populate('car');
 
-        if (userFound) {
-            res.render('profile', { user: userFound }); 
-        } else {
-            res.status(404).send("User not found.");
-        }
+        res.render('profile', { 
+            reviews: userReviews 
+        }); 
+
     } catch (err) {
         console.error(err);
         res.status(500).send("Sorry, an error occurred while loading the profile.");

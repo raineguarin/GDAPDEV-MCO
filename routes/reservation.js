@@ -1,23 +1,52 @@
 // routes/reservations.js
 const express = require('express');
 const router = express.Router();
-
+const user = require('../model/user'); 
 const reservation = require('../model/reservation');
 const review = require('../model/review');
+const vehicle = require('../model/vehicle');
 
 // GET: Show the Manage Reservations admin page
 router.get('/manage-reservations', async (req, res) => {
     try {
-        const allReservations = await reservation.find({});
-        // Renders the view/manage-reservations.hbs file
-        res.render('manage-reservations', { reservations: allReservations });
+        const allReservations = await reservation.find({})
+            .populate('customer')
+            .populate('vehicle');
+
+        const allVehicles = await vehicle.find({});
+
+        res.render('manage-reservations', { 
+            reservations: allReservations,
+            vehicles: allVehicles 
+        });
     } catch (err) {
         console.error(err);
         res.status(500).send("Error loading reservations.");
     }
 });
 
-// POST: Update a reservation status (e.g., Approve or Cancel)
+router.post('/update-reservation-status', async (req, res) => {
+    try {
+        const { id, status } = req.body;
+
+        const updatedRes = await reservation.findByIdAndUpdate(
+            id,
+            { status: status },
+            { new: true }
+        );
+
+        if (!updatedRes) {
+            return res.status(404).json({ error: "Reservation not found." });
+        }
+
+        res.status(200).json({ message: "Status updated successfully." });
+    } catch (err) {
+        console.error("Status Update Error:", err);
+        res.status(500).json({ error: "Server error updating status." });
+    }
+});
+
+// POST: Create a new reservation (Customer side)
 router.post('/reservation', async (req, res) => {
     try {
         if (!req.session.userId) {
@@ -41,9 +70,9 @@ router.post('/reservation', async (req, res) => {
     }
 });
 
+// GET: Show a user's own reservations
 router.get('/reservations', async (req, res) => {
     try {
-
         if (!req.session.userId) {
             return res.redirect('/login');
         }
@@ -66,7 +95,7 @@ router.get('/reservations', async (req, res) => {
     }
 });
 
-//review get
+// GET: Review page
 router.get('/review/:vehicleId', async (req, res) => {
     try {
         const vehicle = await vehicle.findById(req.params.vehicleId);
@@ -81,9 +110,8 @@ router.get('/review/:vehicleId', async (req, res) => {
     }
 });
 
-//review post
+// POST: Submit a review
 router.post('/submit-review', async (req, res) => {
-
     if (!req.session.userId) {
         return res.status(401).json({ error: "Login required." });
     }
@@ -108,7 +136,6 @@ router.post('/submit-review', async (req, res) => {
         });
 
         await newReview.save();
-
         res.json({ message: "Review saved!" });
 
     } catch (err) {
@@ -117,16 +144,15 @@ router.post('/submit-review', async (req, res) => {
     }
 });
 
+// POST: Customer cancels their own reservation
 router.post('/cancel', async (req, res) => {
     try {
         const { reservationId } = req.body;
 
-        // Verify the user is actually logged in
         if (!req.session.userId) {
             return res.status(401).json({ error: "Please log in first." });
         }
 
-        // Find the reservation and update status to 'Cancelled'
         const result = await reservation.findOneAndUpdate(
             { _id: reservationId, customer: req.session.userId },
             { status: 'Cancelled' },
@@ -141,6 +167,36 @@ router.post('/cancel', async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Server error during cancellation." });
+    }
+});
+
+
+// POST: Admin creates a Walk-in Reservation
+router.post('/admin-add-reservation', async (req, res) => {
+    try {
+        const { customerEmail, vehicleId, date, time } = req.body;
+        
+        const foundCustomer = await user.findOne({ email: customerEmail });
+        
+        if (!foundCustomer) {
+            return res.status(404).json({ error: "No customer found with that email." });
+        }
+
+        const newWalkin = new reservation({
+            customer: foundCustomer._id,
+            vehicle: vehicleId, 
+            date: date,
+            time: time,
+            status: 'Approved', // Walk-ins are usually instantly approved
+            paymentStatus: 'Unpaid'
+        });
+
+        await newWalkin.save();
+        res.status(200).json({ message: "Walk-in created successfully." });
+
+    } catch (err) {
+        console.error("Walk-in Error:", err);
+        res.status(500).json({ error: "Server error while creating walk-in." });
     }
 });
 
