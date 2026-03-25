@@ -32,7 +32,7 @@
     <div class="boxcontainer">
         {{#each processing}}
         <div class="boxfriends" id="res-{{this._id}}"> <h2>{{this.vehicle.brand}} {{this.vehicle.model}}</h2>
-            <h4>Date: {{this.date}}</h4>
+            <h4>Date: {{formatDate this.date}}</h4>
             <h4>Time: {{this.time}}</h4>
             <p>Reservation is still processing, awaiting admin confirmation</p>
             <p><strong>Status:</strong> <span style="color: orange;">{{this.status}}</span></p>

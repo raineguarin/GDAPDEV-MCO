@@ -98,10 +98,13 @@ router.get('/profile', async (req, res) => {
             return res.redirect('/login'); 
         }
 
+        const currentUser = await user.findById(req.session.userId);
+
         const userReviews = await review.find({ user: req.session.userId }).populate('car');
 
         res.render('profile', { 
-            reviews: userReviews 
+            reviews: userReviews,
+            user: currentUser 
         }); 
 
     } catch (err) {

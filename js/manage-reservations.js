@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const grid = document.getElementById("reservationGrid");
     const searchInput = document.getElementById("searchInput");
-    const filterTime = document.getElementById("filterTime");
     const filterStatus = document.getElementById("filterStatus");
     const filterPayment = document.getElementById("filterPayment");
 
@@ -53,28 +52,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function applyFilters() {
         const search = searchInput.value.toLowerCase();
-        const timeVal = filterTime.value;
         const statusVal = filterStatus.value;
         const paymentVal = filterPayment.value;
 
         document.querySelectorAll(".reservation-card").forEach(card => {
             const customer = (card.dataset.customer || "").toLowerCase();
             const vehicle = (card.dataset.vehicle || "").toLowerCase();
-            const time = card.dataset.time || "";
             const status = card.dataset.status || "";
             const payment = card.dataset.payment || "";
 
             const matchesSearch = customer.includes(search) || vehicle.includes(search);
-            const matchesTime = (timeVal === "all") || time.includes(timeVal);
             const matchesStatus = (statusVal === "all") || (status === statusVal);
             const matchesPayment = (paymentVal === "all") || (payment === paymentVal);
 
-            card.style.display = (matchesSearch && matchesTime && matchesStatus && matchesPayment) ? "grid" : "none";
+            card.style.display = (matchesSearch && matchesStatus && matchesPayment) ? "grid" : "none";
         });
     }
 
     searchInput.addEventListener("input", applyFilters);
-    filterTime.addEventListener("change", applyFilters);
     filterStatus.addEventListener("change", applyFilters);
     filterPayment.addEventListener("change", applyFilters);
 

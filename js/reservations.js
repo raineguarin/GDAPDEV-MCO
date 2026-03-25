@@ -70,3 +70,27 @@ reviewForm.addEventListener("submit", async (e) => {
         alert("Could not submit review.");
     }
 });
+
+async function cancelReservation(resId) {
+    if (!confirm("Are you sure you want to cancel this reservation? This cannot be undone.")) return;
+
+    try {
+        const response = await fetch('/cancel', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ reservationId: resId }) 
+        });
+
+        if (response.ok) {
+            window.location.reload(); 
+        } else {
+            const result = await response.json();
+            alert("Error: " + (result.error || "Could not cancel the reservation."));
+        }
+    } catch (error) {
+        console.error("Fetch error:", error);
+        alert("Could not connect to the server.");
+    }
+}

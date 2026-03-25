@@ -55,6 +55,16 @@ router.post('/reservation', async (req, res) => {
 
         const { carId, date, time } = req.body;
 
+        const existingReservation = await reservation.findOne({
+            vehicle: carId,
+            date: date,
+            status: { $in: ['Pending', 'Approved'] } 
+        });
+
+        if (existingReservation) {
+            return res.status(400).json({ error: "Sorry, this car is already reserved for this date!" });
+        }
+
         const newRes = new reservation({
             customer: req.session.userId,
             vehicle: carId,
@@ -64,6 +74,7 @@ router.post('/reservation', async (req, res) => {
 
         await newRes.save();
         res.status(201).json({ message: "Success" });
+        
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Failed to save reservation." });

@@ -31,7 +31,7 @@ router.post('/delete-vehicle', async (req, res) => {
 // GET: Show the public Cars page
 router.get('/cars', async (req, res) => {
     try {
-        const allVehicles = await vehicle.find({}).lean();
+        const allVehicles = await vehicle.find({ status: true }).lean();
 
         for (let car of allVehicles) {
             car.reviews = await Review.find({ car: car._id }).populate('user', 'name');
@@ -87,16 +87,13 @@ router.get('/search', (req, res) => {
 
 router.post('/search', async (req, res) => {
     try {
-        const { filterfromdate, filtertodate, capacity } = req.body;
-        const startDate = new Date(filterfromdate);
-        const endDate = new Date(filtertodate);
+        const { searchDate, capacity } = req.body;
 
         const conflictingReservations = await reservation.find({
-            startDate: { $lte: endDate },
-            endDate: { $gte: startDate }
+            date: searchDate
         });
 
-        const unavailableIds = conflictingReservations.map(r => r.vehicleId);
+        const unavailableIds = conflictingReservations.map(r => r.vehicle);
 
         let query = {
             _id: { $nin: unavailableIds }
