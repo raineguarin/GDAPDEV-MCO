@@ -3,20 +3,20 @@
 const express = require('express');
 const router = express.Router();
 const user = require('../model/user');
+const review = require('../model/review');
+const bcrypt = require('bcrypt');
+
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const review = require('../model/review'); 
 
-// This allows the user to upload an img from their local machine
 const uploadDir = path.join(__dirname, '../assets/images/pfps');
 
-// This makes the directory if it doesn't exist
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-// Picture Storage Configuration
+//pictures
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, uploadDir);
@@ -26,120 +26,128 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage: storage });
-
+const upload = multer({ storage });
 router.get('/register', (req, res) => {
     res.render('register');
 });
 
-
-// Register
+//registration
 router.post('/register', upload.single('profilePic'), async (req, res) => {
     try {
-        const { name, email, number, password, username } = req.body;
-        
+        let { name, email, number, password, username } = req.body;
+
+        email = email.trim();
+        password = password.trim();
+
         const newUser = new user({
             name,
             email,
             phone: number,
-            password, 
+            password,
             username: username || email,
             role: 'Customer',
-            profilePicture: req.file ? req.file.filename : 'default.jpg' 
+            profilePicture: req.file ? req.file.filename : 'default.jpg'
         });
 
-        await newUser.save();
-        
-        // 2. Change this from res.redirect to res.status(200).json
+        await newUser.save(); 
+
         res.status(200).json({ message: "Account created successfully" });
-        
+
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Server Error during registration" });
     }
 });
 
+//login get
 router.get('/login', (req, res) => {
     res.render('login');
 });
 
-// Login
+//login post
 router.post('/login', async (req, res) => {
-    try{
-        const {email, password} = req.body;
-        const userFound = await user.findOne({ email: email });
-        
-        if(userFound){
-            if(userFound.password == password){
-                req.session.userId = userFound._id;
-                
-                if (userFound.role === 'Admin') {
-                    res.redirect('/admin-homepage'); 
-                } else {
-                    res.redirect('/profile'); 
-                }
-                
-            } else {
-                res.status(401).send("Invalid Password");
-            }
-        } else {
-            res.status(404).send("No users found.");
-        }
-    } catch (err){
-        console.error(err);
-        res.status(500).send("Sorry, an error occured in login.");  
-    }
-});
-
-// Profile
-router.get('/profile', async (req, res) => {
     try {
-        if (!req.session.userId) {
-            return res.redirect('/login'); 
+        let { email, password } = req.body;
+
+        email = email.trim();
+        password = password.trim();
+
+        const userFound = await user.findOne({ email });
+
+        if (!userFound) {
+            return res.status(404).send("No users found.");
         }
 
-        const currentUser = await user.findById(req.session.userId);
+        let isMatch = false;
 
-        const userReviews = await review.find({ user: req.session.userId }).populate('car');
 
-        res.render('profile', { 
-            reviews: userReviews,
-            user: currentUser 
-        }); 
+        if (userFound.password.startsWith('$2')) {
+            isMatch = await bcrypt.compare(password, userFound.password);
+        } 
+
+        else {
+            console.log("Migrating plain-text password...");
+
+            if (userFound.password.trim() !== password) {
+                return res.status(401).send("Invalid Password");
+            }
+
+            const hashed = await bcrypt.hash(password, 10);
+
+            userFound.password = hashed;
+            await userFound.save();
+            isMatch = true;
+        }
+
+        if (!isMatch) {
+            return res.status(401).send("Invalid Password");
+        }
+
+        req.session.userId = userFound._id;
+
+        if (userFound.role === 'Admin') {
+            return res.redirect('/admin-homepage');
+        } else {
+            return res.redirect('/profile');
+        }
 
     } catch (err) {
         console.error(err);
-        res.status(500).send("Sorry, an error occurred while loading the profile.");
+        res.status(500).send("Login error.");
     }
 });
 
-router.post('/profile', async (req, res) => {
+
+router.get('/profile', async (req, res) => {
     try {
-        const userEmail = req.query.email;
-        const userFound = await user.find({email: userEmail});
-
-        if(userFound){
-            res.render('/profile', {name: userFound.name});
-        } else {
-            res.status(404).send("No users found.");
+        if (!req.session.userId) {
+            return res.redirect('/login');
         }
-    } catch(err){
+
+        const currentUser = await user.findById(req.session.userId);
+        const userReviews = await review.find({ user: req.session.userId }).populate('car');
+
+        res.render('profile', {
+            reviews: userReviews,
+            user: currentUser
+        });
+
+    } catch (err) {
         console.error(err);
-        res.status(500).send("Sorry, an error occured.");
+        res.status(500).send("Error loading profile.");
     }
 });
 
-//logout
+
 router.get('/logout', (req, res) => {
     req.session.destroy((err) => {
         if (err) {
-            console.error("Error logging out:", err);
+            console.error("Logout error:", err);
             return res.status(500).send("Could not log out.");
         }
-        
-        res.clearCookie('connect.sid'); 
-        
-        res.redirect('/'); 
+
+        res.clearCookie('connect.sid');
+        res.redirect('/');
     });
 });
 
