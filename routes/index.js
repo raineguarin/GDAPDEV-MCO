@@ -11,6 +11,11 @@ const Review = require('../model/review');
 // Homepage Route
 router.get('/', async (req, res) => {
     try {
+        // if user has existing cookie login, redirect to profile
+        if(req.session.userId) {
+            return res.redirect('/profile');
+        }
+
         // .limit(3) keeps only the first 3 cars for the UI layout
         const featured = await vehicle.find().limit(3); 
         
