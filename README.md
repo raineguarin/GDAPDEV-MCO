@@ -76,6 +76,7 @@ The backend is currently being implemented and being tested via server deploymen
    npm install express-session
    npm install multer
    npm install bcrypt
+   npm install dotenv
    ```
 5. Start the server using the following command
 
