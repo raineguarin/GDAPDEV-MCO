@@ -12,8 +12,10 @@ const user = require('./model/user');
 const app = express();
 const exphbs = require('express-handlebars');
 
+require('dotenv').config();
+
 // DATABASE CONNECTION 
-mongoose.connect('mongodb+srv://PahiramKoAdmin:Group4Apdev@pahiramkotse.g6rovco.mongodb.net/pahiramKotseDB?retryWrites=true&w=majority')
+mongoose.connect(process.env.URI)
   .then(() => console.log('Connected to MongoDB...'))
   .catch(err => console.error('Could not connect to MongoDB...', err));
 
