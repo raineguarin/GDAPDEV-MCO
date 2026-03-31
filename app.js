@@ -1,8 +1,7 @@
 // use node app.js in cli to check if connection works
 // after use http://localhost:3000/ on a browser to check that the homepage renders
 
-const dns = require('node:dns');
-dns.setServers(['8.8.8.8', '1.1.1.1']); 
+require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -12,8 +11,9 @@ const user = require('./model/user');
 const app = express();
 const exphbs = require('express-handlebars');
 
+
 // DATABASE CONNECTION 
-mongoose.connect('mongodb+srv://PahiramKoAdmin:Group4Apdev@pahiramkotse.g6rovco.mongodb.net/pahiramKotseDB?retryWrites=true&w=majority')
+mongoose.connect(process.env.URI)
   .then(() => console.log('Connected to MongoDB...'))
   .catch(err => console.error('Could not connect to MongoDB...', err));
 
@@ -43,7 +43,7 @@ app.engine('hbs', exphbs.engine({
 }));
 
 app.set('view engine', 'hbs');
-app.set('views', path.join(process.cwd(), 'view'));
+app.set('views', path.join(__dirname, 'view')); 
 
 // MIDDLEWARE
 app.use(express.static('public'));
@@ -83,5 +83,14 @@ app.use('/', vehicleRoutes);
 app.use('/', reservationRoutes); 
 app.use('/', customerRoutes);
 
-// SERVER START
+const PORT = process.env.PORT || 3000;
+
+// computer
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
+    });
+}
+
+// vercel
 module.exports = app;
