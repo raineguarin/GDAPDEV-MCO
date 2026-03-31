@@ -6,7 +6,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-const session = require('cookie-session');
+const session = require('express-session');
 const user = require('./model/user');
 const app = express();
 const exphbs = require('express-handlebars');
